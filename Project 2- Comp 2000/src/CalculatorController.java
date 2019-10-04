@@ -1,14 +1,10 @@
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
-public class CalculatorController  extends Calculator implements Initializable{
+public class CalculatorController extends Calculator {
 	@FXML
-	private Button quitButton;
+	private static Button quitButton;
 	@FXML
 	private Button button1;
 	@FXML
@@ -48,126 +44,109 @@ public class CalculatorController  extends Calculator implements Initializable{
 	@FXML
 	private Button equalsButton;
 	@FXML
-	private TextField operationTextField;
-		
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
+	private Text operationText;
+	@FXML
+	private Text errorText;
 	
 	public void update() {
-		operationTextField.setText(getInfix());
+		operationText.setText(getInfix());
+		errorText.setText(getErrorMessage());
 	}
 	
 	public void divide() {
 		if(!getInfix().equals("")) {
-			setInfix(String.format("%s/", getInfix()));
+			input("/");
 		}
 		update();
 	}
 	
 	public void multiply() {
 		if(!getInfix().equals("")) {
-			setInfix(String.format("%s*", getInfix()));
+			input("*");
 		}
 		update();
 	}
 
 	public void add() {
 		if(!getInfix().equals("")) {
-			setInfix(String.format("%s+", getInfix()));
+			input("+");
 		}
 		update();
 	}
 	
 	public void subtract() {
 		if(!getInfix().equals("")) {
-			setInfix(String.format("%s-", getInfix()));
+			input("-");
 		}
 		update();
 	}
 	
 	public void one() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s1", getInfix()));
-		}
+		input("1");
 		update();
 	}
 	public void two() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s2", getInfix()));
-		}
+		input("2");
 		update();
 	}
 	public void three() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s3", getInfix()));
-		}
+		input("3");
+		update();
 	}
 	public void four() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s4", getInfix()));
-		}
+		input("4");
 		update();
 	}
 	public void five() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s5", getInfix()));
-		}
+		input("5");
 		update();
 	}
 	public void six() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s6", getInfix()));
-		}
+		input("6");
 		update();
 	}
 	public void seven() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s7", getInfix()));
-		}
+		input("7");
+		update();
 	}
 	public void eight() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s8", getInfix()));
-		}
+		input("8");
 		update();
 	}
 	public void nine() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s9", getInfix()));
-		}
+		input("9");
 		update();
 	}
 	public void zero() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s0", getInfix()));
+		if(!getInfix().substring(getInfix().length()-1).equals("/")) {
+			input("0");
+		}else {
+			setErrorMessage("Cannot Divide by 0.");
 		}
 		update();
 	}
 	
 	public void openParenthesis() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s(", getInfix()));
-		}
+		input("(");
 		update();
 	}
 	
 	public void closedParenthesis() {
-		if(!getInfix().equals("")) {
-			setInfix(String.format("%s)", getInfix()));
-		}
+		input(")");
 		update();
 	}
 	
 	public void clear() {
 		setInfix("");
+		setErrorMessage("");
+		setHasAnswer(false);
 		update();
 	}
 	
 	public void delete() {
-		setInfix(getInfix().substring(0, getInfix().length()-1));
+		if(!getInfix().equals("")) {
+			setInfix(getInfix().substring(0, getInfix().length()-1));
+		}
 		update();
 	}
 	
@@ -175,4 +154,9 @@ public class CalculatorController  extends Calculator implements Initializable{
 		System.exit(0);
 	}
 	
+	public void equals() {
+		calculate();
+		update();
+	}
+
 }

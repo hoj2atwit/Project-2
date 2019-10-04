@@ -74,7 +74,7 @@ public class PostfixEvaluator {
 			} else if (isOperand(curChar)) {
 				tempStr += curChar;
 				if (entry.charAt(i+1) != ' ') {
-					System.out.printf("Incorrect postfix! (Check operands)%n");
+					Calculator.error("Incorrect postfix! (Check operands)");
 					return null;
 				}
 				temp.push(tempStr);
@@ -102,7 +102,7 @@ public class PostfixEvaluator {
 	private static int getOpType(String entry) {
 		int stringLength = entry.length();
 		if (stringLength != 1) {
-			System.out.printf("Incorrect operation syntax! (getOpType, postfixCalculation.java)%n");
+			Calculator.error("Incorrect operation syntax! (getOpType, postfixCalculation.java)");
 			return (Integer) null;
 		}
 		char operand = entry.charAt(0);
@@ -117,7 +117,7 @@ public class PostfixEvaluator {
 		} else if (operand == '-') {
 			return 4;
 		} else {
-			System.out.printf("Incorrect operation syntax! (getOptype, error message 2, postfixCalculation.java");
+			Calculator.error("Incorrect operation syntax! (getOptype, error message 2, postfixCalculation.java");
 			return (Integer) null;
 		}
 	}
@@ -138,7 +138,7 @@ public class PostfixEvaluator {
 				sum += (current - 48)*Math.pow(10, i);
 			}
 		} else {
-			System.out.printf("Invalid string input to toNum! (toNum, postfixCalculation)%n");
+			Calculator.error("Invalid string input to toNum! (toNum, postfixCalculation)");
 			return (Double) null;
 		}
 		
@@ -167,7 +167,7 @@ public class PostfixEvaluator {
 		} else if (opType == 4) {			// -
 			answer = a-b;
 		} else {
-			System.out.printf("Invalid operand! (doMath, postfixCalculation)%n");
+			Calculator.error("Invalid operand! (doMath, postfixCalculation)");
 			return (Double) null;
 		}
 		return answer;
