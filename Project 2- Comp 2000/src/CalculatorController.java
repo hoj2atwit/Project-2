@@ -154,9 +154,14 @@ public class CalculatorController extends Calculator implements Initializable {
 	}
 	
 	public void delete() {
-		if(!getInfix().equals("")) {
-			setInfix(getInfix().substring(0, getInfix().length()-1));
+		if(!isHasAnswer()) {
+			if(!getInfix().equals("")) {
+				setInfix(getInfix().substring(0, getInfix().length()-1));
+			}
+		}else {
+			setErrorMessage("Clear before starting a new equation.");
 		}
+			
 		update();
 	}
 	
