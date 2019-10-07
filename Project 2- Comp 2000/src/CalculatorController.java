@@ -266,7 +266,7 @@ public class CalculatorController extends Calculator implements Initializable {
 		    	  if(e.getCode() == KeyCode.ASTERISK) { 
 		    		  multiply();
 		    	  }
-		    	  if(e.getCode() == KeyCode.BACK_SLASH) { 
+		    	  if(e.getCode() == KeyCode.SLASH) { 
 		    		  divide();
 		    	  }
 		    	  if(e.getCode() == KeyCode.PLUS) { 
